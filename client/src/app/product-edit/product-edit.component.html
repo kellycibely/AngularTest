@@ -1,0 +1,26 @@
+<mat-card>
+  <form #productForm="ngForm" (ngSubmit)="save(productForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{product.name ? 'Edit' : 'Add'}} Produto</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="href" [(ngModel)]="product.href">
+      <mat-form-field>
+        <input matInput placeholder="Product Name" [(ngModel)]="product.name"
+               required name="name" #name>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!productForm.form.valid">Salvar</button>
+      <button mat-raised-button color="secondary" (click)="remove(product.href)"
+              *ngIf="product.href" type="button">Deletar</button>
+      <a mat-button routerLink="/product-list">Cancelar</a>
+    </mat-card-actions>
+    <mat-card-footer>
+      <div class="giphy">
+        <img src="{{product.giphyUrl}}" alt="{{product.name}}">
+      </div>
+    </mat-card-footer>
+  </form>
+</mat-card>
